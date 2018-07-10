@@ -40,9 +40,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return new ViewHolder(tweetView);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post = mPostList.get(position);
+
+        //TODO: Add image to profile picture. (check if it exists)
 
         try {
             Glide.with(mContext)
@@ -53,8 +56,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
         holder.tvCaption.setText(post.getDescription());
         holder.tvUserName.setText(post.getUser().getUsername());
-        holder.btnProfilePic.setText("ProfilePic");
-        holder.btnHeart.setText("heart");
+        //TODO: Scale the heart to be not soooo big.
+        holder.btnHeart.setBackgroundResource(R.drawable.ufi_heart_icon);
+        holder.btnHeart.setText("");
         Log.d("RecyclerViewAdapterTag", "ON BIND VIEW HOLDER ");
     }
 
@@ -69,12 +73,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public TextView tvUserName;
         public TextView tvCaption;
         public Button btnHeart;
-        public Button btnProfilePic;
+        public Button ivProfilePic;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            btnProfilePic = itemView.findViewById(R.id.userProfile);
+            ivProfilePic = itemView.findViewById(R.id.userProfile);
             ivCoverImage = itemView.findViewById(R.id.ivCoverImage);
             tvUserName = itemView.findViewById(R.id.tvUserName);
             tvCaption = itemView.findViewById(R.id.tvCaption);
