@@ -73,14 +73,14 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        posts = loadTopPosts();
+        posts = new ArrayList<>();
         adapter = new RecyclerViewAdapter(posts);
         Log.d(TAG, "Finished setting the adapter");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvPosts = view.findViewById(R.id.rvPosts);
         rvPosts.setLayoutManager(linearLayoutManager);
         rvPosts.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        loadTopPosts();
     }
 
     @Override
@@ -117,11 +117,10 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private List<Post> loadTopPosts() {
+    private void loadTopPosts() {
         final Post.Query postQuery = new Post.Query();
         postQuery.getTop().withUser();
 
-        final List<Post> returnLst = new ArrayList<>();
         postQuery.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> objects, ParseException e) {
@@ -131,12 +130,12 @@ public class HomeFragment extends Fragment {
                         Log.d(TAG, "Post [" + i + "] = " + objects.get(i).getDescription()
                                 + "\nusername: " + objects.get(i).getUser().getUsername());
                     }
-                    returnLst.addAll(objects);
+                    posts.addAll(objects);
+                    adapter.notifyDataSetChanged();
                 } else {
                     e.printStackTrace();
                 }
             }
         });
-        return returnLst;
     }
 }
