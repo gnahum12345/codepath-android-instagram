@@ -32,12 +32,16 @@ public class User extends ParseUser {
         put(KEY_PROFILE_PIC, img);
     }
 
-    public String getPassword() {
-        return getString(KEY_PASSWORD);
-    }
-
     public void setPassword(String password) {
         put(KEY_PASSWORD, password);
+    }
+
+    public String getUsername() {
+        return getString(KEY_USERNAME);
+    }
+
+    public void setUsername(String username) {
+        put(KEY_USERNAME, username);
     }
 
 }

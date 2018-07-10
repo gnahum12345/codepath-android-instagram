@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,6 +47,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Post post = mPostList.get(position);
 
         //TODO: Add image to profile picture. (check if it exists)
+        Log.d("AdapterTAG", Boolean.toString(post.getUser().get("profilePic") == null));
+
 
         try {
             Glide.with(mContext)
@@ -57,8 +60,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.tvCaption.setText(post.getDescription());
         holder.tvUserName.setText(post.getUser().getUsername());
         //TODO: Scale the heart to be not soooo big.
-        holder.btnHeart.setBackgroundResource(R.drawable.ufi_heart_icon);
-        holder.btnHeart.setText("");
+        holder.btnHeart.setBackgroundResource(R.drawable.ufi_heart);
         Log.d("RecyclerViewAdapterTag", "ON BIND VIEW HOLDER ");
     }
 
@@ -72,7 +74,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ImageView ivCoverImage;
         public TextView tvUserName;
         public TextView tvCaption;
-        public Button btnHeart;
+        public ImageButton btnHeart;
         public Button ivProfilePic;
 
         public ViewHolder(View itemView) {

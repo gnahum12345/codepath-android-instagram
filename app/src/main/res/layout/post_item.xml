@@ -54,12 +54,13 @@
         android:layout_below="@+id/image_container"
         android:text="Description" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnHeart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/tvCaption"
-        android:text="heart" />
+        app:srcCompat="@drawable/ufi_heart_icon" />
 
 
 </RelativeLayout>
