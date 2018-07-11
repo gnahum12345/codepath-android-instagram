@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         if (ParseUser.getCurrentUser() != null) {
-//            switchActivity();
+            switchActivity();
         }
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {

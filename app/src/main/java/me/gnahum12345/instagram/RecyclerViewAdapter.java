@@ -18,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.parse.ParseException;
 import com.squareup.picasso.Picasso;
 
+
 import java.util.List;
 
 import me.gnahum12345.instagram.model.Post;
@@ -48,7 +49,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Post post = mPostList.get(position);
+        final Post post = mPostList.get(position);
 
         //TODO: Add image to profile picture. (check if it exists)
         Log.d("AdapterTAG", Boolean.toString(post.getUser().getParseFile("profilePic") == null));
@@ -56,7 +57,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(mContext, DetailActivity.class);
+                i.putExtra("post", post);
+                mContext.startActivity(i);
             }
         });
 
@@ -108,5 +111,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             ivHeart = itemView.findViewById(R.id.ivHeart);
         }
 
+    }
+
+    // Clean all elements of the recycler
+    public void clear() {
+        mPostList.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Post> list) {
+        mPostList.addAll(list);
+        notifyDataSetChanged();
     }
 }

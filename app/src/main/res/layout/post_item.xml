@@ -64,12 +64,6 @@
         android:layout_below="@+id/ivHeart"
         android:text="Description" />
 
-    <TextView
-        android:id="@+id/tvTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvCaption"
-        android:text="TextView" />
 
 
 </RelativeLayout>
