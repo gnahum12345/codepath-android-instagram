@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etEmailLogin;
     EditText etPasswordLogin;
     Button btnLogin;
+    Button btnSignUp;
 
     private static String TAG = "LoginActivityTAG";
 
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         etEmailLogin = findViewById(R.id.etEmailLogin);
         etPasswordLogin = findViewById(R.id.etPasswordLogin);
         btnLogin = findViewById(R.id.btnLogin);
+        btnSignUp = findViewById(R.id.btnSignUp);
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,8 +45,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         if (ParseUser.getCurrentUser() != null) {
-            switchActivity();
+//            switchActivity();
         }
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
     }
 
     private void login(String username, String password) {

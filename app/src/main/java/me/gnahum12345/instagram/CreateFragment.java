@@ -1,5 +1,6 @@
 package me.gnahum12345.instagram;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -28,13 +30,15 @@ import org.w3c.dom.Text;
  * Use the {@link CreateFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateFragment extends Fragment implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
+public class CreateFragment extends Fragment implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private OnFragmentInteractionListener mListener;
 
     private Button btnCapture;
     private TextView tvCaption;
     private Button btnCreate;
+    private boolean canCreate = false;
+    private boolean photoTaken = false;
 
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final int REQUEST_CAMERA_PERMISSION = 1;
@@ -94,21 +98,35 @@ public class CreateFragment extends Fragment implements View.OnClickListener, Ac
         btnCreate = view.findViewById(R.id.btnCreate);
         tvCaption = view.findViewById(R.id.tvCaption);
 
+        tvCaption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO Show dialog
+//                errorDialog();
+            }
+        });
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //TODO create post.
             }
         });
 
         btnCapture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //TODO take photo and display.
             }
         });
     }
 
+
+    private void errorDialog() {
+        new AlertDialog.Builder(getActivity())
+                .setMessage("One or more information is missing. Please take the photo or/and add a caption.")
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -133,9 +151,10 @@ public class CreateFragment extends Fragment implements View.OnClickListener, Ac
         mListener = null;
     }
 
-    @Override
-    public void onClick(View view) {
 
+    public void takePhoto() {
+        //TODO take photo
+        photoTaken = true;
     }
 
     /**
@@ -151,5 +170,9 @@ public class CreateFragment extends Fragment implements View.OnClickListener, Ac
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private boolean isCanCreate() {
+        return ((tvCaption.getText() != null || !tvCaption.getText().toString().equals("")) && photoTaken);
     }
 }
