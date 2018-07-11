@@ -1,6 +1,7 @@
 package me.gnahum12345.instagram;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,11 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.parse.ParseException;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import me.gnahum12345.instagram.model.Post;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
@@ -47,10 +51,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Post post = mPostList.get(position);
 
         //TODO: Add image to profile picture. (check if it exists)
-        Log.d("AdapterTAG", Boolean.toString(post.getUser().get("profilePic") == null));
+        Log.d("AdapterTAG", Boolean.toString(post.getUser().getParseFile("profilePic") == null));
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         try {
+            Glide.with(mContext)
+                    .load(post.getUser().getParseFile("profilePic").getFile())
+                    .apply(RequestOptions.placeholderOf(R.drawable.contact_placeholder)
+                            .error(R.drawable.contact_placeholder)
+                            .fitCenter())
+                    .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(25, 0)))
+                    .into(holder.ivProfilePic);
             Glide.with(mContext)
                     .load(post.getImage().getFile())
                     .into(holder.ivCoverImage);
@@ -59,8 +76,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
         holder.tvCaption.setText(post.getDescription());
         holder.tvUserName.setText(post.getUser().getUsername());
-        //TODO: Scale the heart to be not soooo big.
-        holder.btnHeart.setBackgroundResource(R.drawable.ufi_heart);
+        Picasso.get()
+                .load(R.drawable.ufi_heart)
+                .resize(100, 100)
+                .centerCrop()
+                .into(holder.ivHeart);
+//        holder.btnHeart.setBackgroundResource(R.drawable.ufi_heart);
         Log.d("RecyclerViewAdapterTag", "ON BIND VIEW HOLDER ");
     }
 
@@ -74,8 +95,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ImageView ivCoverImage;
         public TextView tvUserName;
         public TextView tvCaption;
-        public ImageButton btnHeart;
-        public Button ivProfilePic;
+        public ImageView ivHeart;
+        public ImageView ivProfilePic;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -84,7 +105,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             ivCoverImage = itemView.findViewById(R.id.ivCoverImage);
             tvUserName = itemView.findViewById(R.id.tvUserName);
             tvCaption = itemView.findViewById(R.id.tvCaption);
-            btnHeart = itemView.findViewById(R.id.btnHeart);
+            ivHeart = itemView.findViewById(R.id.ivHeart);
         }
+
     }
 }

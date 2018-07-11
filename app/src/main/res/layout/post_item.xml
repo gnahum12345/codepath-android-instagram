@@ -2,19 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="5dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/userContainer">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:text="UserName"
-            android:icon="@color/colorAccent"
+            android:icon="@drawable/contact_placeholder"
             android:id="@+id/userProfile"/>
         <TextView
             android:layout_width="wrap_content"
@@ -54,8 +55,8 @@
         android:layout_below="@+id/image_container"
         android:text="Description" />
 
-    <ImageButton
-        android:id="@+id/btnHeart"
+    <ImageView
+        android:id="@+id/ivHeart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"

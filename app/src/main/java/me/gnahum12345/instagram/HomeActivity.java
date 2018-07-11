@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
@@ -58,10 +59,10 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.Home
 
         viewPager = findViewById(R.id.pager);
 
-
-        fragments.add(new HomeFragment());
-        fragments.add(new CreateFragment());
-        fragments.add(new ProfileFragment());
+        fragments.add(new HomeFragment()); // 0
+        fragments.add(new CreateFragment()); // 1
+        fragments.add(new ProfileFragment()); // 2
+//        fragments.add(new DetailFragment()); // TO BE DETERMINED
 
         adapter = new PageAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
@@ -82,34 +83,46 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.Home
                     case 2:
                         bottomNavigation.setSelectedItemId(R.id.action_profile);
                         break;
+                    default:
+                        outlineMenus();
                 }
             }
             @Override
             public void onPageScrollStateChanged(int i) {
-
             }
         });
+
+
 
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                outlineMenus();
                 switch(menuItem.getItemId()) {
                     case R.id.action_home:
                         viewPager.setCurrentItem(0, true);
-
+                        menuItem.setIcon(R.drawable.instagram_home_filled_24);
                         Log.d(TAG, "HOME");
                         return true;
                     case R.id.action_create:
                         viewPager.setCurrentItem(1, true);
+                        menuItem.setIcon(R.drawable.instagram_new_post_filled_24);
                         return true;
                     case R.id.action_profile:
                         viewPager.setCurrentItem(2, true);
+                        menuItem.setIcon(R.drawable.instagram_user_filled_24);
                         return true;
                     default:
                         return false;
                 }
             }
         });
+    }
+    private void outlineMenus() {
+        Menu btnMenu = bottomNavigation.getMenu();
+        btnMenu.findItem(R.id.action_create).setIcon(R.drawable.instagram_new_post_outline_24);
+        btnMenu.findItem(R.id.action_home).setIcon(R.drawable.instagram_home_outline_24);
+        btnMenu.findItem(R.id.action_profile).setIcon(R.drawable.instagram_user_outline_24);
     }
 
 }

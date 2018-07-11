@@ -1,5 +1,6 @@
 package me.gnahum12345.instagram;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -10,7 +11,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
 
     private List<Fragment> fragments;
 
-    public PageAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public PageAdapter(FragmentManager fm, @NonNull List<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
     }
@@ -24,6 +25,5 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return fragments.size();
     }
-
 
 }
