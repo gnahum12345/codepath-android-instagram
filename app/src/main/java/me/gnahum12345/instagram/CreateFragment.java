@@ -52,6 +52,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
 import org.w3c.dom.Text;
 
 import java.io.File;
@@ -65,6 +70,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
+
+import me.gnahum12345.instagram.model.Post;
 
 
 /**
@@ -83,7 +90,6 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
     private TextView tvCaption;
     private Button btnCreate;
     private ImageView ivPicture;
-    private boolean canCreate = false;
     private boolean photoTaken = false;
 
 
@@ -349,10 +355,39 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
             @Override
             public void onClick(View view) {
                 //TODO Show dialog
-                new AlertDialog.Builder(getContext())
-                        .setTitle("What is the magical caption?")
-                        .show();
-//                errorDialog();
+                // get prompts.xml view
+                LayoutInflater li = LayoutInflater.from(getContext());
+                View promptsView = li.inflate(R.layout.dialog_prompt, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        getContext());
+                alertDialogBuilder.setTitle("Magical Caption");
+                // set prompts.xml to alertdialog builder
+                alertDialogBuilder.setView(promptsView);
+
+                final EditText userInput = (EditText) promptsView
+                        .findViewById(R.id.editTextDialogUserInput);
+                final TextView message = promptsView.findViewById(R.id.tvMessageDialogInput);
+                message.setText("What's the Magical Caption? ");
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                tvCaption.setText(userInput.getText());
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
             }
         });
         btnCreate.setOnClickListener(new View.OnClickListener() {
@@ -360,6 +395,7 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
             public void onClick(View view) {
                 //TODO create post.
                 showToast("CREATE");
+                createPost(isCanCreate());
             }
         });
 
@@ -378,6 +414,27 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
         ivPicture = view.findViewById(R.id.ivPicture);
 //        ivPicture.setVisibility(View.INVISIBLE);
     }
+
+    private void createPost(Boolean canCreate) {
+        if (canCreate) {
+            Post p = new Post();
+            p.setUser(ParseUser.getCurrentUser());
+            p.setDescription(tvCaption.getText().toString());
+            p.setImage(new ParseFile(mFile));
+            p.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        mListener.changeToHomeFragment();
+                        showToast("Post Created Successfully!");
+                    } else {
+                        showToast("ERROR in posting. Please try again later");
+                    }
+                }
+            });
+        }
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -706,12 +763,7 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
                 .show();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -741,7 +793,6 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
      */
     private void lockFocus() {
         try {
-
             // This is how to tell the camera to lock focus.
             mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER,
                     CameraMetadata.CONTROL_AF_TRIGGER_START);
@@ -890,11 +941,11 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void changeToHomeFragment();
     }
 
     private boolean isCanCreate() {
-        return ((tvCaption.getText() != null || !tvCaption.getText().toString().equals("")) && photoTaken);
+        return ((tvCaption.getText() != null && !tvCaption.getText().toString().equals("")) && photoTaken);
     }
 
     /**

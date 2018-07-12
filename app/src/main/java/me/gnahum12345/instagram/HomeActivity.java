@@ -28,15 +28,17 @@ import java.util.zip.Inflater;
 
 import me.gnahum12345.instagram.model.Post;
 
-public class HomeActivity extends AppCompatActivity implements HomeFragment.HomeFragmentListener, CreateFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener {
+public class HomeActivity extends AppCompatActivity implements CreateFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener {
+
     @Override
     public void onFragmentInteraction(Uri uri) {
         Log.d(TAG, "Implementing on detail Click");
     }
 
     @Override
-    public void onDetailClick() {
-        Log.d(TAG, "Implementing on detail Click");
+    public void changeToHomeFragment() {
+        viewPager.setCurrentItem(0, true);
+        bottomNavigation.setSelectedItemId(R.id.action_home);
     }
 
     private static final String TAG = "HomeActivityTAG";
@@ -65,7 +67,6 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.Home
         fragments.add(new HomeFragment()); // 0
         fragments.add(new CreateFragment()); // 1
         fragments.add(new ProfileFragment()); // 2
-//        fragments.add(new DetailFragment()); // TO BE DETERMINED
 
         adapter = new PageAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(adapter);

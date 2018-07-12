@@ -26,7 +26,6 @@ import me.gnahum12345.instagram.model.Post;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HomeFragment.HomeFragmentListener} interface
  * to handle interaction events.
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -40,7 +39,6 @@ public class HomeFragment extends Fragment {
     private SwipeRefreshLayout swipeContainer;
     private RecyclerView rvPosts;
     private RecyclerViewAdapter adapter;
-    private HomeFragmentListener mListener;
     private List<Post> posts;
 
     public HomeFragment() {
@@ -96,19 +94,11 @@ public class HomeFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof HomeFragmentListener) {
-            mListener = (HomeFragmentListener) context;
-
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     /**
@@ -121,10 +111,6 @@ public class HomeFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface HomeFragmentListener {
-        // TODO: Update argument type and name
-        void onDetailClick();
-    }
 
 
     private void loadTopPosts() {
