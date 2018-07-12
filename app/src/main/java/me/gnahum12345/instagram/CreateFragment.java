@@ -165,7 +165,6 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
             Activity activity = getActivity();
             if (activity != null) {
                 showToast("ERROR");
-//                activity.startActivity(new Intent(activity.this, MainActivity.class));
             }
         }
     };
@@ -360,6 +359,7 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
             @Override
             public void onClick(View view) {
                 //TODO create post.
+                showToast("CREATE");
             }
         });
 
@@ -367,11 +367,16 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
             @Override
             public void onClick(View view) {
                 //TODO take photo and display.
+                if (!photoTaken) {
+                    takePhoto();
+                } else {
+                    ErrorDialog.newInstance("Photo has already been taken").show(getFragmentManager(),TAG);
+                }
             }
         });
         mTextureView = view.findViewById(R.id.aftvCamera);
         ivPicture = view.findViewById(R.id.ivPicture);
-        ivPicture.setVisibility(View.INVISIBLE);
+//        ivPicture.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -393,8 +398,10 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
 
     @Override
     public void onPause() {
-        closeCamera();
-        stopBackgroundThread();
+        if (!photoTaken) {
+            closeCamera();
+            stopBackgroundThread();
+        }
         super.onPause();
     }
 
@@ -444,7 +451,7 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
                         Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)),
                         new CompareSizesByArea());
                 mImageReader = ImageReader.newInstance(largest.getWidth(), largest.getHeight(),
-                        ImageFormat.JPEG, /*maxImages*/2);
+                        ImageFormat.JPEG, /*maxImages*/1);
                 mImageReader.setOnImageAvailableListener(
                         mOnImageAvailableListener, mBackgroundHandler);
 
@@ -725,8 +732,6 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
 
 
     public void takePhoto() {
-        //TODO take photo
-        photoTaken = true;
         unlockFocus();
         lockFocus();
     }
@@ -802,7 +807,19 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ivPicture.setImageURI(Uri.fromFile(mFile));
+                            if (!photoTaken) {
+                                ivPicture.setImageURI(Uri.fromFile(mFile));
+                                ivPicture.setRotation(90);
+                                ivPicture.setVisibility(View.VISIBLE);
+                                unlockFocus();
+                                mTextureView.setVisibility(View.INVISIBLE);
+                                closeCamera();
+                                stopBackgroundThread();
+                                photoTaken = true;
+                            } else {
+                                return;
+                            }
+
                         }
                     });
                     Log.d(TAG, mFile.toString());
@@ -817,6 +834,7 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
             e.printStackTrace();
         }
     }
+
 
     /**
      * Retrieves the JPEG orientation from the specified screen rotation.
