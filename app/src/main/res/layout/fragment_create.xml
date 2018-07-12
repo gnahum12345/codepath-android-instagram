@@ -9,19 +9,29 @@
     <!-- TODO: Make a frame layout such that AutoFitTextureView and ImageView are overlayed and when a photo is taken, it is displayed. -->
 
 
-    <me.gnahum12345.instagram.AutoFitTextureView
-        android:id="@+id/aftvCamera"
+    <FrameLayout
+        android:id="@+id/aftvCameraHolder"
         android:layout_width="match_parent"
-        android:layout_height="275dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"/>
+        android:layout_height="275dp">
 
+        <me.gnahum12345.instagram.AutoFitTextureView
+            android:id="@+id/aftvCamera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ivPicture"/>
+    </FrameLayout>
 
     <Button
         android:id="@+id/btnCapture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/aftvCamera"
+        android:layout_below="@+id/aftvCameraHolder"
         android:layout_centerHorizontal="true"
         android:text="Capture" />
 
