@@ -9,12 +9,12 @@ Time spent: **X** hours spent in total
 The following **required** functionality is completed:
 
 - [x] User can sign up to create a new account using Parse authentication
-- [ ] User can log in and log out of his or her account
+- [x] User can log in and log out of his or her account
 - [x] The current signed in user is persisted across app restarts
-- [ ] User can take a photo, add a caption, and post it to "Instagram"
+- [x] User can take a photo, add a caption, and post it to "Instagram"
 - [x] User can view the last 20 posts submitted to "Instagram"
-- [ ] User can pull to refresh the last 20 posts submitted to "Instagram"
-- [ ] User can tap a post to view post details, including timestamp and caption.
+- [x] User can pull to refresh the last 20 posts submitted to "Instagram"
+- [x] User can tap a post to view post details, including timestamp and caption.
 
 The following **optional** features are implemented:
 
@@ -37,7 +37,11 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [ ] List anything else that you can get done to improve the app functionality!
-
+- [x] Use of TextureView and ImageView to display an ongoing camera in app and the corresponding picture immediately after. 
+- [x] use of mostly fragments moving in between the timeline fragment, camera fragment and profile fragment. 
+- [x] alerting the user that they have not yet uploaded a photo or aded a caption 
+- [x] preventing the user to upload without all the correct requirements. 
+- [ ] after user sign up they go to the profile screen to finish their profile. 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
 1.

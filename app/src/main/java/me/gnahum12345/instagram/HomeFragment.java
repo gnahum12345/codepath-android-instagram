@@ -128,6 +128,7 @@ public class HomeFragment extends Fragment {
                     }
                     posts.addAll(objects);
                     adapter.notifyDataSetChanged();
+
                 } else {
                     e.printStackTrace();
                 }

@@ -69,6 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         });
 
+
         try {
             Glide.with(mContext)
                     .load(post.getUser().getParseFile("profilePic").getFile())
