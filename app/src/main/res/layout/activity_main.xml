@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/instagram_background"
     tools:context=".MainActivity">
 
     <!--TODO: Change the background. -->
@@ -18,17 +19,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="134dp"
         android:hint="Email"
-        android:inputType="textEmailAddress"/>
+        android:inputType="textEmailAddress"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:id="@+id/etPasswordLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/etEmailLogin"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        android:layout_below="@+id/etEmailLogin"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColor="#FFFFFF"
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="145dp" />
 
@@ -36,19 +39,18 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="#FFFFFFFF"
         android:layout_below="@+id/etPasswordLogin"
-        android:text="Login"
-        />
+        android:layout_centerHorizontal="true"
+        android:background="#00FFFFFF"
+        android:text="Login" />
 
     <Button
         android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFFFF"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="#00FFFFFF"
         android:text="Don't have an account? Sign up here!" />
 
 </RelativeLayout>

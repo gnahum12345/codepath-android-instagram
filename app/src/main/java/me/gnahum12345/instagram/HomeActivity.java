@@ -28,12 +28,7 @@ import java.util.zip.Inflater;
 
 import me.gnahum12345.instagram.model.Post;
 
-public class HomeActivity extends AppCompatActivity implements CreateFragment.OnFragmentInteractionListener, ProfileFragment.onProfileFragmentListener {
-
-    @Override
-    public void onProfileInteraction() {
-        Log.d(TAG, "Implementing on detail Click");
-    }
+public class HomeActivity extends AppCompatActivity implements CreateFragment.OnFragmentInteractionListener {
 
     @Override
     public void changeToHomeFragment() {

@@ -1,6 +1,10 @@
 package me.gnahum12345.instagram;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,10 +12,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -72,11 +86,12 @@ public class SignUpActivity extends AppCompatActivity {
         user.setPassword(password);
         user.setUsername(userName);
 
+
         user.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    Intent i = new Intent(SignUpActivity.this, HomeActivity.class);
+                    Intent i = new Intent(SignUpActivity.this, LastStepsActivity.class);
                     startActivity(i);
                     finish();
                 } else {

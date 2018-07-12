@@ -71,13 +71,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
         try {
-            Glide.with(mContext)
-                    .load(post.getUser().getParseFile("profilePic").getFile())
-                    .apply(RequestOptions.placeholderOf(R.drawable.contact_placeholder)
-                            .error(R.drawable.contact_placeholder)
-                            .fitCenter())
-                    .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(25, 0)))
-                    .into(holder.ivProfilePic);
+            if (post.getUser().getParseFile("profilePic") != null) {
+                Glide.with(mContext)
+                        .load(post.getUser().getParseFile("profilePic").getFile())
+                        .apply(RequestOptions.placeholderOf(R.drawable.contact_placeholder)
+                                .error(R.drawable.contact_placeholder)
+                                .fitCenter())
+                        .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(25, 0)))
+                        .into(holder.ivProfilePic);
+            } else {
+                Glide.with(mContext)
+                        .load(R.drawable.contact_placeholder)
+                        .into(holder.ivProfilePic);
+            }
+
             Glide.with(mContext)
                     .load(post.getImage().getFile())
                     .into(holder.ivCoverImage);

@@ -45,11 +45,17 @@ public class DetailActivity extends AppCompatActivity {
                             .error(R.drawable.ic_launcher_background).fitCenter())
                     .into(ivCoverImage);
 
-            Glide.with(this)
-                    .load(p.getUser().getParseFile("profilePic").getFile())
-                    .apply(RequestOptions.placeholderOf(R.drawable.ic_launcher_background)
-                            .error(R.drawable.ic_launcher_background).fitCenter())
-                    .into(ivProfilePic);
+            if (p.getUser().getParseFile("profilePic") != null) {
+                Glide.with(this)
+                        .load(p.getUser().getParseFile("profilePic").getFile())
+                        .apply(RequestOptions.placeholderOf(R.drawable.ic_launcher_background)
+                                .error(R.drawable.ic_launcher_background).fitCenter())
+                        .into(ivProfilePic);
+            } else {
+                Glide.with(this)
+                        .load(R.drawable.contact_placeholder)
+                        .into(ivProfilePic);
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (com.parse.ParseException e) {
@@ -57,6 +63,6 @@ public class DetailActivity extends AppCompatActivity {
         }
         tvTime.setText(p.getCreatedAt().toString());
         tvCaption.setText(p.getDescription());
-
+        tvUserName.setText(p.getUser().getUsername());
     }
 }

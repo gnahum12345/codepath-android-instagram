@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -36,6 +37,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
@@ -396,6 +398,10 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
                 //TODO create post.
                 showToast("CREATE");
                 createPost(isCanCreate());
+                mFile = null;
+                ivPicture.setVisibility(View.INVISIBLE);
+                tvCaption.setVisibility(View.INVISIBLE);
+                mTextureView.setVisibility(View.VISIBLE);
             }
         });
 
@@ -406,13 +412,15 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
                 if (!photoTaken) {
                     takePhoto();
                 } else {
+
                     ErrorDialog.newInstance("Photo has already been taken").show(getFragmentManager(),TAG);
                 }
             }
         });
         mTextureView = view.findViewById(R.id.aftvCamera);
         ivPicture = view.findViewById(R.id.ivPicture);
-//        ivPicture.setVisibility(View.INVISIBLE);
+        ivPicture.setVisibility(View.INVISIBLE);
+        tvCaption.setVisibility(View.INVISIBLE);
     }
 
     private void createPost(Boolean canCreate) {
@@ -756,12 +764,6 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
 
 
 
-    private void errorDialog() {
-        new AlertDialog.Builder(getActivity())
-                .setMessage("One or more information is missing. Please take the photo or/and add a caption.")
-                .setPositiveButton(android.R.string.ok, null)
-                .show();
-    }
 
 
 
@@ -861,9 +863,8 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
                             if (!photoTaken) {
                                 ivPicture.setImageURI(Uri.fromFile(mFile));
                                 ivPicture.setRotation(90);
-                                ivPicture.setVisibility(View.VISIBLE);
+                                changeVisibility();
                                 unlockFocus();
-                                mTextureView.setVisibility(View.INVISIBLE);
                                 closeCamera();
                                 stopBackgroundThread();
                                 photoTaken = true;
@@ -886,6 +887,15 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
         }
     }
 
+
+    private void changeVisibility() {
+        mTextureView.setVisibility(View.INVISIBLE);
+        ivPicture.setVisibility(View.VISIBLE);
+        btnCreate.setVisibility(View.VISIBLE);
+        tvCaption.setVisibility(View.VISIBLE);
+        tvCaption.setText("MAGICAL CAPTION");
+        tvCaption.setTextColor(Color.BLACK);
+    }
 
     /**
      * Retrieves the JPEG orientation from the specified screen rotation.

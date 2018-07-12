@@ -78,6 +78,8 @@ public class HomeFragment extends Fragment {
         adapter = new RecyclerViewAdapter(posts);
         Log.d(TAG, "Finished setting the adapter");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
         rvPosts = view.findViewById(R.id.rvPosts);
         rvPosts.setLayoutManager(linearLayoutManager);
         rvPosts.setAdapter(adapter);
@@ -126,6 +128,7 @@ public class HomeFragment extends Fragment {
                         Log.d(TAG, "Post [" + i + "] = " + objects.get(i).getDescription()
                                 + "\nusername: " + objects.get(i).getUser().getUsername());
                     }
+                    posts.clear();
                     posts.addAll(objects);
                     adapter.notifyDataSetChanged();
 

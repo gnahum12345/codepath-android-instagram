@@ -2,26 +2,43 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginBottom="5dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp">
 
     <LinearLayout
+        android:id="@+id/userContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/userContainer">
+        android:orientation="horizontal">
+
         <ImageView
+            android:id="@+id/userProfile"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:text="UserName"
             android:icon="@drawable/contact_placeholder"
-            android:id="@+id/userProfile"/>
-        <TextView
+            android:text="UserName" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="USERNAME"
-            android:id="@+id/tvUserName"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="USERNAME"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LOCATION"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -39,7 +56,7 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +69,7 @@
     <ImageView
         android:id="@+id/ivHeart"
         android:layout_width="45dp"
-        android:layout_height="32dp"
+        android:layout_height="35dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/image_container"
         app:srcCompat="@drawable/ufi_heart_icon" />
@@ -62,8 +79,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivHeart"
-        android:text="Description" />
-
+        android:text="Description"
+        android:textColor="#FFFFFF" />
 
 
 </RelativeLayout>

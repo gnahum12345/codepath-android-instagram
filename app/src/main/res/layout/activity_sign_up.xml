@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/instagram_background"
     tools:context=".SignUpActivity">
 
 
@@ -16,7 +17,8 @@
         android:layout_marginBottom="202dp"
         android:ems="10"
         android:hint="Confirm Password"
-        android:inputType="textPersonName" />
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -27,7 +29,8 @@
         android:layout_marginTop="207dp"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPersonName" />
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:id="@+id/etConfirmEmail"
@@ -38,7 +41,8 @@
         android:layout_marginTop="147dp"
         android:ems="10"
         android:hint="Confirm Email"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -49,7 +53,8 @@
         android:layout_marginTop="84dp"
         android:ems="10"
         android:hint="email"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:id="@+id/etUsername"
@@ -60,7 +65,8 @@
         android:layout_marginTop="17dp"
         android:ems="10"
         android:hint="username"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/btnSignUp"
