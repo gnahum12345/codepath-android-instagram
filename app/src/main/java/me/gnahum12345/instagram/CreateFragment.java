@@ -102,6 +102,9 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
             @Override
             public void onClick(View view) {
                 //TODO Show dialog
+                new AlertDialog.Builder(getContext())
+                        .setTitle("What is the magical caption?")
+                        .show();
 //                errorDialog();
             }
         });

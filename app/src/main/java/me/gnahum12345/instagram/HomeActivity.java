@@ -17,11 +17,14 @@ import android.widget.LinearLayout;
 import android.widget.TabHost;
 
 import com.parse.FindCallback;
+import com.parse.LogOutCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Inflater;
 
 import me.gnahum12345.instagram.model.Post;
 
@@ -125,4 +128,29 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.Home
         btnMenu.findItem(R.id.action_profile).setIcon(R.drawable.instagram_user_outline_24);
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.btnLogOut) {
+            logout();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void logout() {
+        ParseUser.logOutInBackground(new LogOutCallback() {
+            @Override
+            public void done(ParseException e) {
+                Intent i  = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+    }
 }

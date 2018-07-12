@@ -1,20 +1,14 @@
 package me.gnahum12345.instagram;
 
 import android.net.ParseException;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 import me.gnahum12345.instagram.model.Post;
 

@@ -54,6 +54,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         //TODO: Add image to profile picture. (check if it exists)
         Log.d("AdapterTAG", Boolean.toString(post.getUser().getParseFile("profilePic") == null));
 
+        holder.ivHeart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("TAG", "I liked it");
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
