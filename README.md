@@ -18,8 +18,8 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Style the login page to look like the real Instagram login page.
-- [ ] Style the feed to look like the real Instagram feed.
+- [x] Style the login page to look like the real Instagram login page.
+- [x] Style the feed to look like the real Instagram feed.
 - [x] User should switch between different tabs - viewing all posts (feed view), capture (camera and photo gallery view) and profile tabs (posts made) using a Bottom Navigation View.
 - [ ] User can load more posts once he or she reaches the bottom of the feed using infinite scrolling.
 - [x] Show the username and creation time for each post
@@ -29,9 +29,9 @@ The following **optional** features are implemented:
    - [x] Display the profile photo with each post
    - [ ] Tapping on a post's username or profile photo goes to that user's profile page
 - [ ] User can comment on a post and see all comments for each post in the post details screen.
-- [ ] User can like a post and see number of likes for each post in the post details screen.
+- [x] User can like a post and see number of likes for each post in the post details screen.
 - [x] Create a custom Camera View on your phone.
-- [ ] Run your app on your phone and use the camera to take the photo
+- [x] Run your app on your phone and use the camera to take the photo
 
 
 The following **additional** features are implemented:
@@ -41,11 +41,14 @@ The following **additional** features are implemented:
 - [x] use of mostly fragments moving in between the timeline fragment, camera fragment and profile fragment. 
 - [x] alerting the user that they have not yet uploaded a photo or aded a caption 
 - [x] preventing the user to upload without all the correct requirements. 
-- [ ] after user sign up they go to the profile screen to finish their profile. 
+- [x] after user sign up they go to the profile screen to finish their profile.
+- [x] user can choose their profile picture instead of taking a picture .
+- [ ] user can edit their information.  
+
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. TextureView and really how it works. All the different listeners, etc. 
+2. 
 
 ## Video Walkthrough
 

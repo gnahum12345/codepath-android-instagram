@@ -3,12 +3,18 @@ package me.gnahum12345.instagram;
 import android.net.ParseException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import me.gnahum12345.instagram.model.Post;
 
@@ -61,8 +67,19 @@ public class DetailActivity extends AppCompatActivity {
         } catch (com.parse.ParseException e) {
             e.printStackTrace();
         }
-        tvTime.setText(p.getCreatedAt().toString());
+
+        tvTime.setText(getRelativeTimeAgo(p.getCreatedAt()));
         tvCaption.setText(p.getDescription());
         tvUserName.setText(p.getUser().getUsername());
     }
+
+    public String getRelativeTimeAgo(Date time) {
+        Date d = new Date();
+        String relativeDate = "";
+        relativeDate = DateUtils.getRelativeTimeSpanString(time.getTime(), System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS,
+                DateUtils.FORMAT_ABBREV_RELATIVE).toString();
+        return relativeDate;
+    }
+
+
 }
