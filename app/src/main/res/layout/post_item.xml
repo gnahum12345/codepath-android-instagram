@@ -82,5 +82,14 @@
         android:text="Description"
         android:textColor="#FFFFFF" />
 
+    <TextView
+        android:id="@+id/tvLikes"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_container"
+        android:layout_toEndOf="@+id/ivHeart"
+        android:text="100000 Likes"
+        android:textColor="#FFFFFF" />
+
 
 </RelativeLayout>

@@ -12,12 +12,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.parse.ParseException;
+import com.parse.SaveCallback;
 import com.squareup.picasso.Picasso;
 
+
+import org.json.JSONArray;
 
 import java.util.List;
 
@@ -48,7 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final Post post = mPostList.get(position);
 
         //TODO: Add image to profile picture. (check if it exists)
@@ -58,8 +62,43 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View view) {
                 Log.i("TAG", "I liked it");
+                if (!holder.liked) {
+                    post.like();
+                }  else {
+                    post.setLike(post.getLikes() - 1);
+                }
+                post.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (!holder.liked) {
+                            holder.liked = true;
+                            if (e == null) {
+                                Glide.with(mContext)
+                                        .load(R.drawable.ufi_heart_active)
+                                        .into(holder.ivHeart);
+                            } else {
+                                Toast.makeText(mContext, "Can't like.. There is a problem", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                            }
+                        } else {
+                            holder.liked = false;
+
+                            if (e == null) {
+                                Glide.with(mContext)
+                                        .load(R.drawable.ufi_heart)
+                                        .into(holder.ivHeart);
+                            } else {
+                                Toast.makeText(mContext, "Can't like.. There is a problem", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                            }
+                        }
+                        holder.tvLikes.setText(post.getLikes() + " Likes");
+                    }
+                });
+
             }
         });
+        holder.tvLikes.setText(post.getLikes() + " Likes");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,7 +153,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public TextView tvCaption;
         public ImageView ivHeart;
         public ImageView ivProfilePic;
-
+        private TextView tvLikes;
+        private boolean liked;
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -123,6 +163,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tvUserName = itemView.findViewById(R.id.tvUserName);
             tvCaption = itemView.findViewById(R.id.tvCaption);
             ivHeart = itemView.findViewById(R.id.ivHeart);
+            tvLikes = itemView.findViewById(R.id.tvLikes);
+            liked = false;
         }
 
     }

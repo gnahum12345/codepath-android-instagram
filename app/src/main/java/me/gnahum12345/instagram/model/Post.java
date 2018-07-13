@@ -14,7 +14,12 @@ public class Post extends ParseObject {
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_IMAGE = "image";
     private static final String KEY_USER = "user";
+    private static final String KEY_LIKES = "likes";
 
+
+    public int getLikes() {return getInt(KEY_LIKES); }
+    public void like() { put(KEY_LIKES, getLikes() + 1); }
+    public void setLike(int i) {put(KEY_LIKES, i); }
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
