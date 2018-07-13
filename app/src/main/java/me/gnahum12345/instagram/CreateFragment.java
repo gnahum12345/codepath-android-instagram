@@ -421,6 +421,8 @@ public class CreateFragment extends Fragment implements ActivityCompat.OnRequest
         ivPicture = view.findViewById(R.id.ivPicture);
         ivPicture.setVisibility(View.INVISIBLE);
         tvCaption.setVisibility(View.INVISIBLE);
+        btnCreate.setVisibility(View.INVISIBLE);
+        btnCapture.setVisibility(View.VISIBLE);
     }
 
     private void createPost(Boolean canCreate) {

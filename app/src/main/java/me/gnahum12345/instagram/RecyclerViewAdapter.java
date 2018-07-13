@@ -56,7 +56,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         final Post post = mPostList.get(position);
 
         //TODO: Add image to profile picture. (check if it exists)
-        Log.d("AdapterTAG", Boolean.toString(post.getUser().getParseFile("profilePic") == null));
+//        Log.d("AdapterTAG", Boolean.toString(post.getUser().getParseFile("profilePic") == null));
 
         holder.ivHeart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,14 +110,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
         try {
-            if (post.getUser().getParseFile("profilePic") != null) {
-                Glide.with(mContext)
-                        .load(post.getUser().getParseFile("profilePic").getFile())
-                        .apply(RequestOptions.placeholderOf(R.drawable.contact_placeholder)
-                                .error(R.drawable.contact_placeholder)
-                                .fitCenter())
-                        .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(25, 0)))
-                        .into(holder.ivProfilePic);
+            if (post.getUser() != null) {
+                if (post.getUser().getParseFile("profilePic") != null) {
+                    Glide.with(mContext)
+                            .load(post.getUser().getParseFile("profilePic").getFile())
+                            .apply(RequestOptions.placeholderOf(R.drawable.contact_placeholder)
+                                    .error(R.drawable.contact_placeholder)
+                                    .fitCenter())
+                            .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(25, 0)))
+                            .into(holder.ivProfilePic);
+                }
             } else {
                 Glide.with(mContext)
                         .load(R.drawable.contact_placeholder)
@@ -131,6 +133,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             e.printStackTrace();
         }
         holder.tvCaption.setText(post.getDescription());
+//        holder.tvUserName.setText("username that rocks!");
         holder.tvUserName.setText(post.getUser().getUsername());
         Picasso.get()
                 .load(R.drawable.ufi_heart)

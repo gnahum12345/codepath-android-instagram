@@ -125,8 +125,8 @@ public class HomeFragment extends Fragment {
                 if (e == null) {
                     Log.d(TAG, Integer.toString(objects.size()));
                     for (int i = 0; i < objects.size(); i++) {
-                        Log.d(TAG, "Post [" + i + "] = " + objects.get(i).getDescription()
-                                + "\nusername: " + objects.get(i).getUser().getUsername());
+                        Log.d(TAG, "Post [" + i + "] = " + objects.get(i).getDescription());
+//                                + "\nusername: " + objects.get(i).getUser().getUsername());
                     }
                     posts.clear();
                     posts.addAll(objects);
@@ -137,5 +137,13 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        posts.clear();
+        adapter.notifyDataSetChanged();
+        loadTopPosts();
     }
 }

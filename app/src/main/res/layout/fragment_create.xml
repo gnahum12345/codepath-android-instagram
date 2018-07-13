@@ -12,7 +12,7 @@
 
     <FrameLayout
         android:id="@+id/aftvCameraHolder"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true">
@@ -20,7 +20,7 @@
         <me.gnahum12345.instagram.AutoFitTextureView
             android:id="@+id/aftvCamera"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:visibility="visible" />
@@ -32,32 +32,35 @@
             android:layout_gravity="top"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="w,16:9"
+            app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </FrameLayout>
 
-    <TextView
-        android:id="@+id/tvCaption"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btnCapture"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="10dp"
-        android:clickable="true"
-        android:hint="Caption"
-        android:inputType="textPersonName"
-        android:visibility="visible" />
+    </FrameLayout>
 
     <Button
         android:id="@+id/btnCapture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/aftvCameraHolder"
         android:layout_centerHorizontal="true"
+        android:visibility="visible"
         android:text="Capture" />
+
+    <TextView
+        android:id="@+id/tvCaption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnCapture"
+        android:layout_gravity="bottom|center"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:text="Caption"
+        android:inputType="textPersonName"
+        android:visibility="visible" />
+
 
 
     <Button
@@ -69,4 +72,6 @@
         android:layout_marginBottom="17dp"
         android:text="Save Post"
         android:visibility="visible" />
+
+
 </RelativeLayout>

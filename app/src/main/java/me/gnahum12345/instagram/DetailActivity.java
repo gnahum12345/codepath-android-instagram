@@ -75,8 +75,7 @@ public class DetailActivity extends AppCompatActivity {
 
     public String getRelativeTimeAgo(Date time) {
         Date d = new Date();
-        String relativeDate = "";
-        relativeDate = DateUtils.getRelativeTimeSpanString(time.getTime(), System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS,
+        String relativeDate = DateUtils.getRelativeTimeSpanString(time.getTime(), System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS,
                 DateUtils.FORMAT_ABBREV_RELATIVE).toString();
         return relativeDate;
     }
